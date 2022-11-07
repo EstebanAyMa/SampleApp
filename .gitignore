@@ -33,3 +33,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/node_modules/
+/app/assets/builds/application.css
+/app/assets/builds/application.js
+/app/assets/builds/application.js.map
