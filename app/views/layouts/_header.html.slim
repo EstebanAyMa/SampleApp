@@ -5,14 +5,18 @@ header.p-3.text-bg-dark
       ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0"
         li
           a href="#" class="nav-link px-2 text-secondary" Home
+        li.dropdown
+          a.nav-link.px-2.text-white.dropdown-toggle data-bs-toggle="dropdown" href="#" Cruceros
+          ul.dropdown-menu.dropdown-menu-dark
+            li = link_to "Todos los cruceros", cruises_path, class: "dropdown-item"
+            - Category.all.each do |category|
+              li = link_to category.display_name, cruises_path(category: category.id), class: "dropdown-item"
         li
-          a href="#" class="nav-link px-2 text-white" Features
+          a href="#" class="nav-link px-2 text-white" Administrar
         li
-          a href="#" class="nav-link px-2 text-white" Pricing
+          a href="#" class="nav-link px-2 text-white" Contacto
         li
-          a href="#" class="nav-link px-2 text-white" FAQs
-        li
-          a href="#" class="nav-link px-2 text-white" About
+          a href="#" class="nav-link px-2 text-white" Acerca de
 
       form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"
         input type="search" class="form-control form-control-dark text-bg-dark m-0" placeholder="Search..." aria-label="Search"
@@ -30,10 +34,6 @@ header.p-3.text-bg-dark
 /         li.dropdown
 /           a.dropdown-toggle href="#" data-toggle="dropdown"
 /             | Cruceros
-/           ul.dropdown-menu
-/             li = link_to "Todos los cruceros", cruises_path
-/             - Category.all.each do |category|
-/               li = link_to category.display_name, cruises_path(category: category.id)
 /         li = link_to "Acerca de",   about_path
 /         li = link_to "Contacto", contact_us_path
 /         - if logged_in? && current_user.admin?
