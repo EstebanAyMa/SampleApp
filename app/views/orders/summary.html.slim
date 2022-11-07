@@ -1,0 +1,39 @@
+- provide(:title, "Resumen de Compra")
+
+h1 Resumen de Compra
+.container
+  .col-md-8
+    .card
+      table
+        tr
+          th Producto
+          th Cantidad
+          th Costo
+        - @shopping_bag.bag_items.each do |order_item|
+          tr
+            td
+              = image_tag order_item.product.primary_img.url, class: "table-img"
+              = link_to order_item.product.name, product_path(order_item.product)
+            td = order_item.quantity
+            td $#{format_price(order_item.product.price)}
+    .card
+      .row
+        .col-md-6.address
+          h2Direccion de envio:
+          p = render @order.shipping_address
+        .col-md-6.address
+          h2 Direccion de facturacion:
+          p = render @order.billing_address
+  aside.col-md-4
+    section.card
+      h2 Resumen de orden
+      dl
+        dt Producto Total:
+        dd $#{format_price(@shopping_bag.total)}
+        br
+        dt Costo de envio:
+        dd $#{format_price(@shopping_bag.calculate_postage)}
+        hr
+        dt Total:
+        dd $#{format_price(@shopping_bag.total + @shopping_bag.calculate_postage)}
+      = button_to "Aceptar", order_payment_path(@order), method: "patch", class: "btn btn-primary", disabled: !@shopping_bag.enough_stock?

@@ -7,12 +7,12 @@ class CruisesController < ApplicationController
     respond_to do |format|
       format.html {
         if params[:category]
-          category  = Category.find(params[:category])
+          category = Category.find(params[:category])
           @cruises = category.cruises.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
-          @title    = category.display_name
+          @title = category.display_name
         else
           @cruises = Cruise.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
-          @title    = "Todos los cruiseos"
+          @title = "Todos los cruiseos"
         end
       }
       format.json { render json: Cruise.paginate(page: params[:page], per_page: params[:per_page]) }

@@ -18,8 +18,12 @@ $gray: $gray-600;
   box-sizing:         border-box;
 }
 
-/* universal */
+.logo {
+  width: 50px;
+  height: 50px;
+}
 
+/* universal */
 body {
   position: relative;
   min-height: 100vh;
@@ -139,24 +143,9 @@ dd { float: right; }
   }
 }
 
-.dropdown-menu li a {
-  padding: 6px 10px !important;
-  text-transform: capitalize !important;
-  margin: 0 !important;
-  border: none !important;
-  font-size: 14px !important;
-  &:hover {
-    background: white !important;
-    color: $primary !important;
-    text-decoration: none !important;
-  }
-}
-
-.mb-2 { margin-bottom: 2rem !important; }
-
-.mt-2 { margin-top: 2rem !important; }
-
-/* typography */
+//.mb-2 { margin-bottom: 2rem !important; }
+//
+//.mt-2 { margin-top: 2rem !important; }
 
 h1, h2, h3, h4, h5, h6 {
   line-height: 1;
@@ -166,7 +155,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 2.5em;
   letter-spacing: -2px;
-  margin-bottom: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -184,49 +174,6 @@ h3 {
 p { line-height: 1.7; color: grey; }
 
 /* header */
-
-.navbar {
-  border-radius: 0;
-  margin-bottom: 0;
-  align-items: center !important;
-  .navbar-brand {
-    padding: 39px 0;
-    font-size: 2em;
-    color: black;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-    font-weight: bold;
-    &:hover {
-      text-decoration: none;
-    }
-  }
-  .navbar-collapse { padding: 0; }
-  .navbar-nav a {
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
-    text-transform: uppercase;
-  }
-  .navbar-left {
-    margin-left: 15px;
-    a {
-      padding: 39px 19px;
-      color: #1D2547;
-      &:hover {
-        background: white;
-        color: $primary;
-        text-decoration: none;
-      }
-    }
-  }
-  .navbar-right a {
-    border-radius: 3px;
-    padding: 8px 10px;
-    margin-top: 28px;
-  }
-  .navbar-right i { margin-right: 2px; }
-}
 
 #bag {
   a {
@@ -345,37 +292,8 @@ input[type=number] {
 
 /* Landing page */
 
-.jumbotron {
-  padding: 0 !important;
-  border-radius: 0 !important;
-  background-image: image-url("home/superstore.jpg");
-  height: 780px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  color: white;
-  .container {
-    margin-top: 160px;
-    div {
-      margin-top: 50px;
-      a {
-        padding: 9px 18px;
-        border: solid 2px white;
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        &:hover {
-          cursor: pointer;
-          text-decoration: none;
-        }
-      }
-    }
-  }
-}
 
 /* Products Index */
-
 .product-row {
   margin-bottom: 25px;
   a {

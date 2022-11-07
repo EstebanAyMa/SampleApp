@@ -1,0 +1,21 @@
+= render 'shared/error_messages', object: f.object
+
+= f.hidden_field :user_id, class: 'form-control', value: current_user.id
+
+= f.label :line_1, "Direccion 1"
+= f.text_field :line_1, class: 'form-control'
+
+= f.label :line_2, "Direccion 2"
+= f.text_field :line_2, class: 'form-control'
+
+= f.label :line_3, "Direccion 3"
+= f.text_field :line_3, class: 'form-control'
+
+= f.label :town, "Ciudad"
+= f.text_field :town, class: 'form-control'
+
+= f.label :county, "Pais"
+= f.text_field :county, class: 'form-control'
+
+= f.label :postcode, "Codigo postal"
+= f.text_field :postcode, class: 'form-control'

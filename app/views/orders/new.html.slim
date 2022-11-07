@@ -1,0 +1,57 @@
+- provide(:title, "Confirmar compra")
+
+h1 Direccion de envio y facturacion
+.row
+  .col-md-4.col-md-offset-4.card
+    = form_for(@order) do |f|
+      - if @shipping_addresses.any?
+        fieldset#shipping_address_select style="height: fit-content"
+          legend Seleccionar direccion de envio:
+          - @shipping_addresses.each do |sa|
+            .radio-address
+              label
+                = f.radio_button :shipping_address_id, sa.id, style: "margin-bottom: 10px;"
+                = render sa
+          #new_shipping_address_btn.btn.btn-primary Agregar nueva direcccion
+      fieldset#new_shipping_address hidden=@shipping_addresses.any?
+        legend Direccion de envio:
+        = f.fields_for :shipping_address do |sa|
+          = render 'addresses/fields', f: sa
+      label.checkbox.inline for="same_address"
+        input name="same_billing_address" type="hidden" value="0"
+        input#same_billing_address type="checkbox" value="1" name="same_billing_address" checked="checked"
+        span Utilizar misma direccion para facturacion
+      #billing_address hidden="true"
+        - if @billing_addresses.any?
+          fieldset#billing_address_select
+            legend Seleccionar direccion:
+            - @billing_addresses.each do |ba|
+              .radio-address
+                label
+                  = f.radio_button :billing_address_id, ba.id
+                  = render ba
+            #new_billing_address_btn.btn.btn-primary Agregar direccion
+        fieldset#new_billing_address hiddne=@billing_addresses.any?
+          legend Direccion de facturacion:
+          = f.fields_for :billing_address do |ba|
+            = render 'addresses/fields', f: ba
+      = f.submit "Continuar", class: "btn btn-success"
+
+script
+  / $("#new_shipping_address_btn").click(function () {
+  /   $("#shipping_address_select").hide();
+  /   $("#new_shipping_address").show();
+  / });
+  /
+  / $("#same_billing_address").click(function () {
+  /   if ($(this).is(":checked")) {
+  /     $("#billing_address").hide();
+  /   } else {
+  /     $("#billing_address").show();
+  /   }
+  / });
+  /
+  / $("#new_billing_address_btn").click(function () {
+  /   $("#billing_address_select").hide();
+  /   $("#new_billing_address").show();
+  / });

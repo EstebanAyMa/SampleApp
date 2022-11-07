@@ -1,0 +1,4 @@
+h1 Bienvenido al sitio de cruceros
+p Hola #{@user.fullname},
+p Bienvenido al sitio de crucerso. De click en la siguiente liga para activar su cuenta:
+= link_to "Activar", edit_account_activation_url(@user.activation_token, email: @user.email)
