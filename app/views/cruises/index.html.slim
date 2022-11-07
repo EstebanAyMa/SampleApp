@@ -1,0 +1,16 @@
+- provide(:title, @title) 
+
+.container
+  h1 = @title
+  - @cruises.in_groups_of(4).each do |group|
+    .row.product-row
+      - group.each do |cruise|
+        - if cruise
+          .col-md-3
+            = link_to cruise do
+              .cruise
+                - if cruise.primary_img&.url.present?
+                  = image_tag cruise.primary_img.url
+                h3 = cruise.name
+                span = format_price(cruise.price)
+  = will_paginate
