@@ -1,8 +1,7 @@
-class SubCategory < ApplicationRecord
-  belongs_to :category
+class Region < ApplicationRecord
+  has_many :destinations, dependent: :destroy
   has_many :cruises, dependent: :destroy
   validates :name, presence: true
-  validates :category_id, presence: true
 
   def display_name
     name.capitalize

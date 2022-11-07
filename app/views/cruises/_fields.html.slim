@@ -3,11 +3,11 @@
 = f.label :name, "Nombre"
 = f.text_field :name, class: "form-control"
 
-= f.label :category_id, "Region"
-= f.collection_select(:category_id, @categories, :id, :display_name, prompt: '--- Seleccionar region ---')
+= f.label :region_id, "Region"
+= f.collection_select(:region_id, @regions, :id, :display_name, prompt: '--- Seleccionar region ---')
 
-= f.label :sub_category_id, "Crucero"
-= f.collection_select(:sub_category_id, @sub_cats, :id, :display_name, include_blank: '--- Seleccionar crucero ---')
+= f.label :destination_id, "Crucero"
+= f.collection_select(:destination_id, @destinations, :id, :display_name, include_blank: '--- Seleccionar destino ---')
 
 = f.label :description, "Descripcion"
 = f.text_area :description, class: "form-control"
@@ -15,7 +15,7 @@
 = f.label :price, "Precio"
 = f.number_field :price, step: :any, class: "form-control"
 
-= f.label :quantity, "Cantidad"
+= f.label :quantity, "Numero de camarotes"
 = f.number_field :quantity, class: "form-control"
 
 = f.label :primary_img, "Imagen"

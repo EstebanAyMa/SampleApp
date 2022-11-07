@@ -9,7 +9,7 @@ header.p-3.text-bg-dark
           = link_to "Cruceros", "#", class: "nav-link px-2 text-white dropdown-toggle", data: { "bs-toggle": "dropdown" }
           ul.dropdown-menu.dropdown-menu-dark
             li = link_to "Todos los cruceros", cruises_path, class: "dropdown-item"
-            - Category.all.each do |category|
+            - Region.all.each do |category|
               li = link_to category.display_name, cruises_path(category: category.id), class: "dropdown-item"
         li
           - if logged_in? && current_user.admin?

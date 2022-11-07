@@ -12,10 +12,10 @@ h1 Resumen de Compra
         - @shopping_bag.bag_items.each do |order_item|
           tr
             td
-              = image_tag order_item.product.primary_img.url, class: "table-img"
-              = link_to order_item.product.name, product_path(order_item.product)
+              = image_tag order_item.cruise.primary_img.url, class: "table-img"
+              = link_to order_item.cruise.name, cruise_path(order_item.cruise)
             td = order_item.quantity
-            td $#{format_price(order_item.product.price)}
+            td $#{format_price(order_item.cruise.price)}
     .card
       .row
         .col-md-6.address

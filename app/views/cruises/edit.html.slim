@@ -1,8 +1,8 @@
-- provide(:title, 'Editar Producto')
+- provide(:title, 'Editar Crucero')
 
-h1 Editar Producto
+h1 Editar Crucero
 .row
-  .col-md-4.col-md-offset-4.card
+  .col-md-4.m-auto.card
     = form_for(@cruise, html: { multipart: true }) do |f|
       = render 'fields', f: f
       = f.submit "Guardar cambios", class: "btn btn-primary"

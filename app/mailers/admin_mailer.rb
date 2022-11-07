@@ -5,8 +5,8 @@ class AdminMailer < ApplicationMailer
     mail subject: "Nueva orden"
   end
 
-  def stock_empty(product)
-    @product = product
+  def stock_empty(cruise)
+    @cruise = cruise
     mail subject: "Producto no existen en almacen"
   end
 

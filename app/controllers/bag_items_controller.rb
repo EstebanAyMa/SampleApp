@@ -2,29 +2,29 @@ class BagItemsController < ApplicationController
   before_action :set_shopping_bag, only: :create
 
   def create
-    product = Product.find(params[:product_id])
-    bag_item = @shopping_bag.add_product(product, bag_item_params)
-    if bag_item.quantity > product.quantity
-      flash[:danger] = "No hay suficientes productos en almacen."
+    cruise = Cruise.find(params[:cruise_id])
+    bag_item = @shopping_bag.add_cruise(cruise, bag_item_params)
+    if bag_item.quantity > cruise.quantity
+      flash[:danger] = "No hay suficientes camarotes disponibles en el crucero."
     else
       if bag_item.save
-        flash[:success] = "Producto agregado a la orden de compra."
+        flash[:success] = "Crucero agregado a la reservacion."
       else
-        flash[:danger] = "Error al agregar el producto."
+        flash[:danger] = "Error al agregar el crucero."
       end
     end
-    redirect_to product
+    redirect_to cruise
   end
 
   def update
     @bag_item = BagItem.find(params[:id])
-    if params[:bag_item][:quantity].to_i > @bag_item.product.quantity
-      flash[:danger] = "No hay suficientes productos en almacen"
+    if params[:bag_item][:quantity].to_i > @bag_item.cruise.quantity
+      flash[:danger] = "No hay suficientes camarotes disponibles en el crucero"
     else
       if @bag_item.update_attributes(bag_item_params)
-        flash[:success] = "La cantidad del producto ha sido actualizada en la orden de compra."
+        flash[:success] = "Los camarotes han sido actualizadas en la reservacion."
       else
-        flash[:danger] = "Error al actualizar la cantidad del producto."
+        flash[:danger] = "Error al actualizar el numero de camarotes en la reservacion."
       end
     end
     redirect_to shopping_bag_url
@@ -33,9 +33,9 @@ class BagItemsController < ApplicationController
   def destroy
     item = BagItem.find(params[:id])
     if item.destroy
-      flash[:success] = "El producto ha sido eliminado de la orden de compra."
+      flash[:success] = "El crucero ha sido eliminado de la reservacion."
     else
-      flash[:danger] = "Error al eliminar el producto de la orden de compra."
+      flash[:danger] = "Error al eliminar el crucero en la reservacion."
     end
     redirect_to shopping_bag_url
   end

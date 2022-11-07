@@ -59,8 +59,8 @@ class OrdersController < ApplicationController
                             postage: @shopping_bag.calculate_postage,
                             status: 1)
     @shopping_bag.bag_items.each do |item|
-      order.order_items.create(product: item.product, quantity: item.quantity)
-      item.product.update_stock(item.quantity)
+      order.order_items.create(cruise: item.cruise, quantity: item.quantity)
+      item.cruise.update_stock(item.quantity)
       item.destroy
     end
     respond_to do |format|

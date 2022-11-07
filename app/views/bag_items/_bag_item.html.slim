@@ -1,7 +1,7 @@
 tr class=("no-stock" if bag_item.cruise.quantity <= bag_item.quantity)
   td
     = image_tag bag_item.cruise.primary_img.url, class: "table-img"
-    = link_to bag_item.cruise.name, product_path(bag_item.cruise)
+    = link_to bag_item.cruise.name, cruise_path(bag_item.cruise)
   td
     = form_for(bag_item) do |f|
       = f.number_field :quantity, class: "form-control"

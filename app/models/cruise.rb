@@ -1,11 +1,11 @@
 class Cruise < ApplicationRecord
-  belongs_to :category
-  belongs_to :sub_category
+  belongs_to :region
+  belongs_to :destination
   mount_uploader :primary_img, CruiseImageUploader
   mount_uploaders :other_imgs, CruiseImageUploader
   serialize :other_imgs, JSON # For SQLlite
-  validates :category_id,     presence: true
-  validates :sub_category_id, presence: true
+  validates :region_id,     presence: true
+  validates :destination_id, presence: true
   validates :name,            presence: true
   validates :price,           presence: true,
                               format: { with: /\A\d+(?:\.\d{0,2})?\z/ },
@@ -26,7 +26,7 @@ class Cruise < ApplicationRecord
 
   def as_json(options = nil)
     hash = super({ :only => [:id, :name, :description, :quantity, :price, :updated_at] })
-    hash.store(:product_name, hash.delete("name"))
+    hash.store(:cruise_name, hash.delete("name"))
     hash[:updated_at] = self.updated_at.to_datetime.strftime("%d-%m-%Y %H:%M")
     return hash
   end

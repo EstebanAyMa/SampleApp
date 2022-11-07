@@ -1,18 +1,18 @@
 class CruisesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
   before_action :admin_user,     only: [:new, :create, :edit, :update, :destroy]
-  before_action :get_categories, only: [:new, :create, :edit, :update]
+  before_action :regions, only: [:new, :create, :edit, :update]
 
   def index
     respond_to do |format|
       format.html {
-        if params[:category]
-          category = Category.find(params[:category])
-          @cruises = category.cruises.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
-          @title = category.display_name
+        if params[:region]
+          region = Region.find(params[:region])
+          @cruises = region.cruises.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
+          @title = region.display_name
         else
           @cruises = Cruise.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
-          @title = "Todos los cruiseos"
+          @title = "Todos los cruceros"
         end
       }
       format.json { render json: Cruise.paginate(page: params[:page], per_page: params[:per_page]) }
@@ -29,43 +29,43 @@ class CruisesController < ApplicationController
 
   def new
     @cruise = Cruise.new
-    @sub_cats = []
+    @destinations = []
     handle_ajax
   end
 
   def create
     @cruise = Cruise.new(cruise_params)
     if @cruise.save
-      flash[:success] = "El cruiseo ha sido agregado."
+      flash[:success] = "El crusero ha sido agregado."
       redirect_to @cruise
     else
-      get_sub_categories
+      destinations
       render 'new'
     end
   end
 
   def edit
     @cruise = Cruise.find(params[:id])
-    get_sub_categories
+    destinations
     handle_ajax
   end
 
   def update
     @cruise = Cruise.find(params[:id])
     if @cruise.update_attributes(cruise_params)
-      flash[:success] = "El cruiseo ha sido actualizado."
+      flash[:success] = "El crusero ha sido actualizado."
       redirect_to @cruise
     else
-      get_sub_categories
+      destinations
       render 'edit'
     end
   end
 
   def destroy
     if Cruise.find(params[:id]).delete
-      flash[:success] = "El cruiseo ha sido eliminado"
+      flash[:success] = "El cruisero ha sido eliminado"
     else
-      flash[:danger] = "Error al elimiar el cruiseo."
+      flash[:danger] = "Error al elimiar el cruisero."
     end
     redirect_to cruises_url
   end
@@ -73,30 +73,27 @@ class CruisesController < ApplicationController
   private
 
   def cruise_params
-    params.require(:cruise).permit(:category_id, :sub_category_id,
+    params.require(:cruise).permit(:region_id, :destination_id,
                                     :name, :description, :price, :quantity,
                                     :primary_img, {other_imgs: []})
   end
 
-  def get_categories
-    @categories = Category.all
+  def regions
+    @regions ||= Region.all
   end
 
-  def get_sub_categories
-    @sub_cats = []
-    unless @cruise.category_id.blank?
-      @sub_cats = @cruise.category.sub_categories
-    end
+  def destinations
+    @destinations ||= @cruise.region_id.present? ? @cruise.region.destinations : []
   end
 
   def handle_ajax
-    if params[:category].present?
-      @sub_cats = Category.find(params[:category]).sub_categories
+    if params[:region].present?
+      @destinations = Region.find(params[:region]).destinations
     end
     if request.xhr?
       respond_to do |format|
         format.json {
-          render json: {sub_categories: @sub_cats}
+          render json: { destinations: @destinations }
         }
       end
     end

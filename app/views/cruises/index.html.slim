@@ -3,7 +3,7 @@
 .container
   h1 = @title
   - @cruises.in_groups_of(4).each do |group|
-    .row.product-row
+    .row.cruise-row
       - group.each do |cruise|
         - if cruise
           .col-md-3
