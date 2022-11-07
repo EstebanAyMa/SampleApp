@@ -1,8 +1,8 @@
-class Order < ApplicationRecord
+class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :shipping_address, class_name: "Address"
   belongs_to :billing_address,  class_name: "Address"
-  has_many :order_items
+  has_many :reservation_items
 
   default_scope -> { order(id: :desc) }
 

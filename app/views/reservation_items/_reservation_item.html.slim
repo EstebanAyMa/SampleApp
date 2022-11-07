@@ -1,0 +1,6 @@
+tr
+  td = image_tag reservation_item.cruise.primary_img.url, class: "table-img"
+  td = reservation_item.cruise.name
+  td = reservation_item.quantity
+  td $#{format_price(reservation_item.cruise.price)}
+  td = link_to "Ver", cruise_path(reservation_item.cruise), class: "btn btn-primary"

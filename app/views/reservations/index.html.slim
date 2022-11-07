@@ -1,7 +1,7 @@
 - provide(:title, "Ordenes")
 h1 Ordenes
 .container
-  - if @orders.any?
+  - if @reservations.any?
     = render 'orders_table', edit_dispatched: true
     = will_paginate
   - else

@@ -65,17 +65,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_200000) do
     t.index ["region_id"], name: "index_destinations_on_region_id"
   end
 
-  create_table "order_items", force: :cascade do |t|
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reservation_items", force: :cascade do |t|
     t.integer "order_id"
     t.integer "cruise_id"
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cruise_id"], name: "index_order_items_on_cruise_id"
-    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["cruise_id"], name: "index_reservation_items_on_cruise_id"
+    t.index ["order_id"], name: "index_reservation_items_on_order_id"
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "reservations", force: :cascade do |t|
     t.integer "user_id"
     t.decimal "item_total"
     t.decimal "postage"
@@ -84,15 +90,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_200000) do
     t.integer "billing_address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
-    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
-  end
-
-  create_table "regions", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["billing_address_id"], name: "index_reservations_on_billing_address_id"
+    t.index ["shipping_address_id"], name: "index_reservations_on_shipping_address_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "shopping_bags", force: :cascade do |t|

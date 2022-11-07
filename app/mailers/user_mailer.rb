@@ -10,11 +10,11 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Reiniciar contraseña"
   end
 
-  def order_confirmation(user)
-    mail to: user.email, subject: "Confirmar orden"
+  def reservation_confirmation(user)
+    mail to: user.email, subject: "Confirmar reservacion"
   end
 
-  def order_dispatched(user)
-    mail to: user.email, subject: "Orden procesada"
+  def reservation_booked(user)
+    mail to: user.email, subject: "Reservacion procesada"
   end
 end

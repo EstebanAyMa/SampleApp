@@ -1,0 +1,9 @@
+- provide(:title, "My reservaciones")
+
+h1 Mis reservaciones
+.container
+  - if @reservations.any?
+    = render 'reservations_table', edit_dispatched: false
+    = will_paginate
+  - else
+    h2 No existen reservaciones anteriores.

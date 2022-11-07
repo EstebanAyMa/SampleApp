@@ -1,0 +1,38 @@
+- provide(:title, "Reservacion")
+
+h1 Reservacion No. #{@reservation.id}
+.container
+  .col-md-8
+    .card
+      table
+        tr
+          th Crucero
+          th Camarotes
+          th Precio
+        - @reservation.reservation_items.each do |reservation_item|
+          tr
+            td
+              = image_tag reservation_item.cruise.primary_img.url, class: "table-img"
+              = link_to reservation_item.cruise.name, cruise_path(reservation_item.cruise)
+            td = reservation_item.quantity
+            td $#{format_price(reservation_item.cruise.price)}
+    .card
+      .row
+        .col-md-6.address
+          h2 Direccion de envio:
+          p = render @reservation.shipping_address
+        .col-md-6.address
+          h2 Direccion de compra:
+          p = render @reservation.billing_address
+  aside.col-md-4
+    section.card
+      h2 Resumen de compra
+      dl
+        dt Producto Total:
+        dd $#{format_price(@reservation.item_total)}
+        br
+        dt Costo de envio:
+        dd $#{format_price(@reservation.postage)}
+        hr
+        dt Total:
+        dd $#{format_price(@reservation.item_total + @reservation.postage)}

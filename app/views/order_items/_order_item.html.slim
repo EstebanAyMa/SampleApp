@@ -1,6 +1,0 @@
-tr
-  td = image_tag order_item.cruise.primary_img.url, class: "table-img"
-  td = order_item.cruise.name
-  td = order_item.quantity
-  td $#{format_price(order_item.cruise.price)}
-  td = link_to "Ver", cruise_path(order_item.cruise), class: "btn btn-primary"

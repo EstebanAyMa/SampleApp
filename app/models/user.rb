@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_one  :shopping_bag
-  has_many :orders
+  has_many :reservations
   has_many :addresses
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email

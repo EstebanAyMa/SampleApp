@@ -37,17 +37,17 @@ class CreateModels < ActiveRecord::Migration[7.0]
       t.datetime "updated_at", null: false
     end
 
-    create_table "order_items", force: :cascade do |t|
+    create_table "reservation_items", force: :cascade do |t|
       t.integer "order_id"
       t.integer "cruise_id"
       t.integer "quantity"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["order_id"], name: "index_order_items_on_order_id"
-      t.index ["cruise_id"], name: "index_order_items_on_cruise_id"
+      t.index ["order_id"], name: "index_reservation_items_on_order_id"
+      t.index ["cruise_id"], name: "index_reservation_items_on_cruise_id"
     end
 
-    create_table "orders", force: :cascade do |t|
+    create_table "reservations", force: :cascade do |t|
       t.integer "user_id"
       t.decimal "item_total"
       t.decimal "postage"
@@ -56,9 +56,9 @@ class CreateModels < ActiveRecord::Migration[7.0]
       t.integer "billing_address_id"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.index ["billing_address_id"], name: "index_orders_on_billing_address_id"
-      t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
-      t.index ["user_id"], name: "index_orders_on_user_id"
+      t.index ["billing_address_id"], name: "index_reservations_on_billing_address_id"
+      t.index ["shipping_address_id"], name: "index_reservations_on_shipping_address_id"
+      t.index ["user_id"], name: "index_reservations_on_user_id"
     end
 
     create_table "cruises", force: :cascade do |t|

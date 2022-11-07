@@ -1,0 +1,2 @@
+$("#status-<%= @reservation.id %>").html('<div class="status status-dispatched">Enviado</div>')
+$("#actions-<%= @reservation.id %>").html('<%= link_to "Ver", reservation_path(@reservation), class: "btn btn-primary" %>')

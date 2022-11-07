@@ -1,0 +1,17 @@
+tr
+  td = reservation.id
+  td = reservation.created_at.strftime('%b %d %Y')
+  td $#{format_price(reservation.item_total + reservation.postage)}
+  td id="status-#{reservation.id}"
+    - if reservation.status == 3
+      .status.status-dispatched
+        Enviado
+    - else
+      .status.status-pending
+        Pendiente ....
+  td id="actions-#{reservation.id}"
+    = link_to "Ver", reservation_path(reservation), class: "btn btn-primary"
+    - if edit_dispatched
+      - if reservation.status < 3
+        = link_to "Enviar", reservation_path(reservation), method: :patch, data: { confirm: "Enviar orden?" },
+                  remote: true, class: "btn btn-primary"

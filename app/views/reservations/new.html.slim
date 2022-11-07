@@ -3,7 +3,7 @@
 h1 Direccion de envio y facturacion
 .row
   .col-md-4.m-auto.card
-    = form_for(@order) do |f|
+    = form_for(@reservation) do |f|
       - if @shipping_addresses.any?
         fieldset#shipping_address_select style="height: fit-content"
           legend Seleccionar direccion de envio:
