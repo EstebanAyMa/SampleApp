@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     @reservations = Reservation.where("status >= ?", "1").paginate(page: params[:page])
   end
 
-  def order_history
+  def history
     @reservations = current_user.reservations.where("status >= ?", "1").paginate(page: params[:page])
   end
 
@@ -54,17 +54,17 @@ class ReservationsController < ApplicationController
   end
 
   def payment
-    order = Reservation.find(params[:id])
-    order.update_attributes(item_total: @shopping_bag.total,
-                            postage: @shopping_bag.calculate_postage,
-                            status: 1)
+    reservation = Reservation.find(params[:id])
+    reservation.update(item_total: @shopping_bag.total,
+                       postage: @shopping_bag.calculate_postage,
+                       status: 1)
     @shopping_bag.bag_items.each do |item|
-      order.order_items.create(cruise: item.cruise, quantity: item.quantity)
+      reservation.reservation_items.create(cruise: item.cruise, quantity: item.quantity)
       item.cruise.update_stock(item.quantity)
       item.destroy
     end
     respond_to do |format|
-      format.html { redirect_to reservation_confirmation_url(order) }
+      format.html { redirect_to reservation_confirmation_url(reservation) }
       format.js
     end
   end
@@ -74,12 +74,12 @@ class ReservationsController < ApplicationController
     redirect_to root_url if @reservation.status != 1
     UserMailer.reservation_confirmation(current_user).deliver_now
     AdminMailer.new_order.deliver_now
-    @reservation.update_attributes(status: 2)
+    @reservation.update(status: 2)
   end
 
   def update
     @reservation = Reservation.find(params[:id])
-    @reservation.update_attributes(status: 3)
+    @reservation.update(status: 3)
     UserMailer.reservation_booked(@reservation.user).deliver_now
     respond_to do |format|
       format.html { redirect_to reservations_url }
@@ -104,10 +104,10 @@ class ReservationsController < ApplicationController
   end
 
   def get_previous_addresses
-   @shipping_addresses = current_user.reservations.unscope(:reservation)
+   @shipping_addresses = current_user.reservations
                                      .distinct.select(:shipping_address_id)
                                      .map { |x| x.shipping_address }
-   @billing_addresses  = current_user.reservations.unscope(:reservation)
+   @billing_addresses  = current_user.reservations
                                      .distinct.select(:billing_address_id)
                                      .map { |x| x.billing_address }
   end

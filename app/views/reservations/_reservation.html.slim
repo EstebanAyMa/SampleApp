@@ -5,13 +5,13 @@ tr
   td id="status-#{reservation.id}"
     - if reservation.status == 3
       .status.status-dispatched
-        Enviado
+        | Enviado
     - else
       .status.status-pending
-        Pendiente ....
+        | Pendiente ....
   td id="actions-#{reservation.id}"
     = link_to "Ver", reservation_path(reservation), class: "btn btn-primary"
     - if edit_dispatched
       - if reservation.status < 3
-        = link_to "Enviar", reservation_path(reservation), method: :patch, data: { confirm: "Enviar orden?" },
-                  remote: true, class: "btn btn-primary"
+          = button_to "Enviar", reservation_path(reservation), method: :put, remote: true,
+                       data: { confirm: "Enviar reservacion?" }, class: "btn btn-primary"

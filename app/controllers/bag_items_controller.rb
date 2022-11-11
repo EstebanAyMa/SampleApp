@@ -21,7 +21,7 @@ class BagItemsController < ApplicationController
     if params[:bag_item][:quantity].to_i > @bag_item.cruise.quantity
       flash[:danger] = "No hay suficientes camarotes disponibles en el crucero"
     else
-      if @bag_item.update_attributes(bag_item_params)
+      if @bag_item.update(bag_item_params)
         flash[:success] = "Los camarotes han sido actualizadas en la reservacion."
       else
         flash[:danger] = "Error al actualizar el numero de camarotes en la reservacion."

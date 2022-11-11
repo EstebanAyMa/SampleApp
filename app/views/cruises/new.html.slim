@@ -2,7 +2,7 @@
 
 h1 Nuevo Crucero
 .row
-  .col-md-4.m-auto.card
+  .col-md-4.m-auto.card data={ controller: "crucero--controller"}
     = form_for(@cruise, html: { multipart: true }) do |f|
       = render 'fields', f: f
       = f.submit "Agregar crucero", class: "btn btn-primary"

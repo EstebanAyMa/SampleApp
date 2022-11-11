@@ -1,22 +1,22 @@
-- provide(:title, "Orden de compra")
+- provide :title, "Reservacion"
 
-- if @bag_items.any? %>
-  h1 Orden de compra
+- if @bag_items.any?
+  h1 Resumen de reservacion
   .container
     .col-md-8
       .card
         table id="bag_items"
           tr
-            th Producto
-            th Cantidad
+            th Crucero
+            th Camarotes
             th Precio
             th Eliminar
           = render @bag_items
     aside.col-md-4
       section.card
         dl
-          dt Producto Total:
+          dt Pago Total:
           dd $#{format_price(@shopping_bag.total)}
         = button_to "Pagar", new_reservation_path(payment: true), method: "get", class: "btn btn-primary", disabled: !@shopping_bag.enough_stock?
 - else
-  h1 La orden de compra esta vacia
+  h1 La reservacion esta vacia

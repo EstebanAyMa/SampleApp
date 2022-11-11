@@ -11,73 +11,30 @@ header.p-3.text-bg-dark
             li = link_to "Todos los cruceros", cruises_path, class: "dropdown-item"
             - Region.all.each do |category|
               li = link_to category.display_name, cruises_path(category: category.id), class: "dropdown-item"
-        li
-          - if logged_in? && current_user.admin?
-            li.dropdown
-              = link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" }
-                | Administrar
-              ul.dropdown-menu
-                li = link_to "Agregar Crucero", new_cruise_path
-                li = link_to "Confirmar Compra", reservations_path
+        - if logged_in? && current_user.admin?
+          li.dropdown
+            = link_to "Admin", "#", class: "nav-link px-2 text-white dropdown-toggle", data: { "bs-toggle": "dropdown" }
+            ul.dropdown-menu.dropdown-menu-dark
+              li = link_to "Agregar Crucero", new_cruise_path, class: "dropdown-item"
+              li = link_to "Confirmar Compra", reservations_path, class: "dropdown-item"
         li = link_to "Contacto", contact_us_path, class: "nav-link px-2 text-white"
         li = link_to "Acerca de", about_path, class: "nav-link px-2 text-white"
 
-      form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"
-        input type="search" class="form-control form-control-dark text-bg-dark m-0" placeholder="Search..." aria-label="Search"
-
-      / li id="bag"
-      /   = link_to shopping_bag_path do
-      /     i.fas.fa-shopping-bag.fa-lg
-      /       | $#{format_price(item_total)}
-      - if logged_in?
-        li.dropdown id="account"
-          a.dropdown-toggle href="#" data-toggle="dropdown"
-            i.fas.fa-user.fa-lg
-            = current_user.first_name.presence || "Cuenta"
-          ul.dropdown-menu
-            li = link_to "Mis Ordenes", my_reservations_path
-            li = link_to "Configuracion", edit_user_path(current_user)
-            li.divider
-            li = link_to "Salir", logout_path, method: "delete"
-      - else
-        div.text-end
-          = link_to "Ingresar", login_path, class: "btn btn-outline-light me-2"
-          = link_to "Crear cuenta", signup_path, class: "btn btn-warning"
-
-/ header.p-3.text-bg-dark
-/   nav.navbar
-/     a.navbar-brand href=root_path
-/     div.navbar-collapse.collapse
-/       ul.nav.navbar-nav.navbar-left
-/         li = link_to "Principal", root_path
-/         li.dropdown
-/           a.dropdown-toggle href="#" data-toggle="dropdown"
-/             | Cruceros
-/         li = link_to "Acerca de",   about_path
-/         li
-/         - if logged_in? && current_user.admin?
-/           li.dropdown
-/             a.dropdown-toggle href="#" data-toggle="dropdown"
-/               | Administrar
-/             ul.dropdown-menu
-/               li = link_to "Nuevo Producto", new_cruise_path
-/               li = link_to "Ordenes", orders_path
-/       ul.nav.navbar-nav.navbar-right
-/         li id="bag"
-/           = link_to shopping_bag_path do
-/             i.fas.fa-shopping-bag.fa-lg
-/               | $#{format_price(item_total)}
-/         - if logged_in?
-/           li.dropdown id="account"
-/             a.dropdown-toggle href="#" data-toggle="dropdown"
-/               i.fas.fa-user.fa-lg
-/               = current_user.first_name.presence || "Cuenta"
-/             ul.dropdown-menu
-/               li = link_to "Mis Ordenes", my_reservations_path
-/               li = link_to "Configuracion", edit_user_path(current_user)
-/               li.divider
-/               li = link_to "Salir", logout_path, method: "delete"
-/         - else
-/           li id="account"
-/             = link_to login_path
-/               i.fas.fa-user.fa-lg Iniciar sesion
+        li id="bag" style="margin: 0 10px;"
+          i.bi-bag style="font-size: 30px;"
+          = link_to shopping_bag_path do
+            span $#{format_price(item_total)}
+        - if logged_in?
+          li.dropdown id="account"
+            = link_to "#", class: "nav-link px-2 text-white dropdown-toggle", data: { "bs-toggle": "dropdown" }
+              i.bi-github style="margin: 0 5px;"
+              = current_user&.first_name || "Cuenta"
+            ul.dropdown-menu.dropdown-menu-dark
+              li = link_to "Mis Reservaciones", my_reservations_path, class: "dropdown-item"
+              li = link_to "Configuracion", edit_user_path(current_user), class: "dropdown-item"
+              li.divider
+              li = button_to "Salir", logout_path, method: "delete", class: "dropdown-item"
+        - else
+          div.text-end
+            = link_to "Ingresar", login_path, class: "btn btn-outline-light me-2"
+            = link_to "Crear cuenta", signup_path, class: "btn btn-warning"

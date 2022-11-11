@@ -26,7 +26,7 @@ class PasswordResetsController < ApplicationController
     if password_blank?
       flash.now[:danger] = "La contraseña no puede estar vacia"
       render 'edit'
-    elsif @user.update_attributes(user_params)
+    elsif @user.update(user_params)
       log_in @user
       flash[:success] = "La contraseña se ha actualizado."
       redirect_to root_path

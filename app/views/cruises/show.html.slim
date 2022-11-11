@@ -1,6 +1,9 @@
+ruby:
+  js_controller = "crucero--controller"
+
 - provide(:title, @cruise.name)
 
-.container.mt-2
+.container.mt-2 data={ controller: js_controller }
   .row
     aside.col-md-5
       section.primary-image
@@ -10,24 +13,21 @@
       p.mb-2 = @cruise.description
       h2 = format_price(@cruise.price)
       - if @cruise.has_stock?
-        h3 Camarotes disponibles: =< @cruise.quantity
+        h3 Camarotes disponibles: #{@cruise.quantity}
         = form_for(@bag_item) do |f|
           = hidden_field_tag :cruise_id, @cruise.id
           .input-group.quantity.mb-2
             span.input-group-btn
-              button.btn.btn-default.btn-minus data={ field: "bag_item[quantity]" } -
+              .btn.btn-default.btn-minus data={ action: "click->#{js_controller}#decrementValue", field: "bag_item[quantity]" }
+                | -
             = f.number_field :quantity, class: 'form-control quantity text-center', value: 1
             span.input-group-btn
-              button.btn.btn-default.btn-plus data={ field: "bag_item[quantity]" } +
-          = f.submit "Agregar a la orden", class: "btn btn-primary"
+              .btn.btn-default.btn-plus data={ action: "click->#{js_controller}#incrementValue", field: "bag_item[quantity]" }
+                | +
+          = f.submit "Reserverar camarotes", class: "btn btn-primary"
       - else
         h3 Reservaciones no disponibles
       - if logged_in? && current_user.admin?
         hr
         = link_to "Editar", edit_cruise_path(@cruise), class: "btn btn-primary"
         = link_to "Eliminar", @cruise, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
-
-script
-  / $('.btn-plus').on('click', function(e) { quantity.incrementValue(e) });
-  / $('.btn-minus').on('click', function(e) { quantity.decrementValue(e); });
-

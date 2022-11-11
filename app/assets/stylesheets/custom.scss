@@ -177,8 +177,7 @@ p { line-height: 1.7; color: grey; }
 
 #bag {
   a {
-    background: $primary;
-    border: solid 2px $primary;
+    background: transparent;
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -189,15 +188,15 @@ p { line-height: 1.7; color: grey; }
   }
 }
 
-#account {
-  a {
-    color: $secondary;
-    border: solid 2px $secondary;
-    margin-left: 10px;
-    font-size: 12px;
-  }
-  a, ul { margin-right: 15px; }
-}
+//#account {
+//  a {
+//    color: $secondary;
+//    border: solid 2px $secondary;
+//    margin-left: 10px;
+//    font-size: 12px;
+//  }
+//  a, ul { margin-right: 15px; }
+//}
 
 /* footer */
 

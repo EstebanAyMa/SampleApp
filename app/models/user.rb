@@ -2,15 +2,19 @@ class User < ApplicationRecord
   has_one  :shopping_bag
   has_many :reservations
   has_many :addresses
+
   attr_accessor :remember_token, :activation_token, :reset_token
+
   before_save :downcase_email
   before_create :create_activation_digest
+
   validates :first_name, presence: true, length: { maximum: 25 }
   validates :last_name,  presence: true, length: { maximum: 25 }
   validates :email, presence: true,
             length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
+
   has_secure_password
   validates :password, length: { minimum: 8 }, allow_blank: true
 

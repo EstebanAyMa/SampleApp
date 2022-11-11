@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get   '/reservation/:id/summary',      to: 'reservations#summary',      as: :reservation_summary
   patch 'reservation/:id/payment',       to: 'reservations#payment',      as: :reservation_payment
   get   '/reservation/:id/confirmation', to: 'reservations#confirmation', as: :reservation_confirmation
-  get   '/my_reservations',              to: 'reservations#order_history'
+  get   '/my_reservations',              to: 'reservations#history'
   get   '/contact_us',             to: 'contacts#new'
   resources :contacts, only: :create
 end

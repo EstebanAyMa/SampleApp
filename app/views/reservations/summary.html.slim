@@ -19,7 +19,7 @@ h1 Resumen de Reservacion
     .card
       .row
         .col-md-6.address
-          h2Direccion de envio:
+          h2 Direccion de envio:
           p = render @reservation.shipping_address
         .col-md-6.address
           h2 Direccion de facturacion:
@@ -27,13 +27,13 @@ h1 Resumen de Reservacion
   aside.col-md-4
     section.card
       h2 Resumen de reservacion
-      dl
+      dl style="display: grid; grid-template-columns: 50% 50%;"
         dt Reservacion Total:
-        dd $#{format_price(@shopping_bag.total)}
-        br
+        dd style="text-align: end;" $#{format_price(@shopping_bag.total)}
         dt Costo de envio:
-        dd $#{format_price(@shopping_bag.calculate_postage)}
+        dd style="text-align: end;" $#{format_price(@shopping_bag.calculate_postage)}
+        hr
         hr
         dt Total:
-        dd $#{format_price(@shopping_bag.total + @shopping_bag.calculate_postage)}
+        dd style="text-align: end;" $#{format_price(@shopping_bag.total + @shopping_bag.calculate_postage)}
       = button_to "Aceptar", reservation_payment_path(@reservation), method: "patch", class: "btn btn-primary", disabled: !@shopping_bag.enough_stock?

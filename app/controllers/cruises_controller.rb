@@ -52,7 +52,7 @@ class CruisesController < ApplicationController
 
   def update
     @cruise = Cruise.find(params[:id])
-    if @cruise.update_attributes(cruise_params)
+    if @cruise.update(cruise_params)
       flash[:success] = "El crusero ha sido actualizado."
       redirect_to @cruise
     else
@@ -87,14 +87,10 @@ class CruisesController < ApplicationController
   end
 
   def handle_ajax
-    if params[:region].present?
-      @destinations = Region.find(params[:region]).destinations
-    end
-    if request.xhr?
+    @destinations = Region.find(params[:region_id]).destinations if params[:region_id].present?
+    if params[:region_id].present?
       respond_to do |format|
-        format.json {
-          render json: { destinations: @destinations }
-        }
+        format.json { render json: { destinations: @destinations } }
       end
     end
   end

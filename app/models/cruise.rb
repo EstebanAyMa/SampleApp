@@ -18,7 +18,7 @@ class Cruise < ApplicationRecord
   end
 
   def update_stock(int)
-    update_attributes(quantity: quantity - int)
+    update(quantity: quantity - int)
     if quantity == 0
       AdminMailer.stock_empty(self).deliver_now
     end

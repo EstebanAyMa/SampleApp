@@ -3,7 +3,7 @@ class ShoppingBagsController < ApplicationController
 
   def show
     @bag_items = @shopping_bag.bag_items
-    @reservation     = Reservation.new
+    @reservation = Reservation.new
     unless @shopping_bag.enough_stock?
       msg  = "Lo sentimos, uno o mas productos no se encuentran en almacen. "
       msg += "Por favor, actualice o elimine los productos marcados en rojo."
