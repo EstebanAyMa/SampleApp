@@ -19,7 +19,7 @@ User.create!(first_name: "Usuario",
 # Regions - https://www.royalcaribbean.com/usa/es/cruise-destinations
 destinations = [
   { region: "Caribe y las Bahamas",
-    destinations: ["El Caribe", "Las Bahamas", "Cococay", "Las Bermudas"]
+    destinations: ["El Caribe", "Las Bahamas", "Cococa y", "Las Bermudas"]
   },
   { region: "Europa",
     destinations: ["Europa", "El Mediterraneo", "Grecia y las islas griegas", "Italia"]

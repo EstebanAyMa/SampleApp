@@ -36,7 +36,7 @@ class CruisesController < ApplicationController
   def create
     @cruise = Cruise.new(cruise_params)
     if @cruise.save
-      flash[:success] = "El crusero ha sido agregado."
+      flash[:success] = "El crucero ha sido agregado."
       redirect_to @cruise
     else
       destinations
@@ -53,7 +53,7 @@ class CruisesController < ApplicationController
   def update
     @cruise = Cruise.find(params[:id])
     if @cruise.update(cruise_params)
-      flash[:success] = "El crusero ha sido actualizado."
+      flash[:success] = "El crucero ha sido actualizado."
       redirect_to @cruise
     else
       destinations
@@ -63,9 +63,9 @@ class CruisesController < ApplicationController
 
   def destroy
     if Cruise.find(params[:id]).delete
-      flash[:success] = "El cruisero ha sido eliminado"
+      flash[:success] = "El crucero ha sido eliminado"
     else
-      flash[:danger] = "Error al elimiar el cruisero."
+      flash[:danger] = "Error al elimiar el crucero."
     end
     redirect_to cruises_url
   end
