@@ -6,8 +6,8 @@ class CruisesController < ApplicationController
   def index
     respond_to do |format|
       format.html {
-        if params[:region]
-          region = Region.find(params[:region])
+        if params[:id]
+          region = Region.find(params[:id])
           @cruises = region.cruises.where("quantity > ?", "0").paginate(page: params[:page], per_page: 28)
           @title = region.display_name
         else

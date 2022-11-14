@@ -22,19 +22,19 @@ destinations = [
     destinations: ["El Caribe", "Las Bahamas", "Cococa y", "Las Bermudas"]
   },
   { region: "Europa",
-    destinations: ["Europa", "El Mediterraneo", "Grecia y las islas griegas", "Italia"]
+    destinations: ["Europa", "El Mediterráneo", "Grecia y las islas griegas", "Italia"]
   },
   { region: "Alaska",
     destinations: ["Alaska", "Cruise Tours", "Glaciares de Alaska", "Avistamiento de Ballenas"]
   },
-  { region: "Norte America",
-    destinations: ["Canada", "Nueva Inglaterra", "Costa Oeste", "Hawai"]
+  { region: "Norte América",
+    destinations: ["Canadá", "Nueva Inglaterra", "Costa Oeste", "Hawai"]
   },
   { region: "Asia",
     destinations: %w[Asia Tailandia China Japon]
   },
-  { region: "Pacifico Sur",
-    destinations: ["Cruceros por Pacifico Sur", "Australia", "Nueva Zelanda", "Vanuatu y Fiji"]
+  { region: "Pacífico Sur",
+    destinations: ["Cruceros por Pacífico Sur", "Australia", "Nueva Zelanda", "Vanuatu y Fiji"]
   }
 ]
 

@@ -30,4 +30,4 @@ ruby:
       - if logged_in? && current_user.admin?
         hr
         = link_to "Editar", edit_cruise_path(@cruise), class: "btn btn-primary"
-        = link_to "Eliminar", @cruise, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"
+        = button_to "Eliminar", @cruise, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-danger"

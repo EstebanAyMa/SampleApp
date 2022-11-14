@@ -6,14 +6,14 @@ ruby:
 = f.label :name, "Nombre"
 = f.text_field :name, class: "form-control"
 
-= f.label :region_id, "Region"
+= f.label :region_id, "Región"
 = f.collection_select :region_id, @regions, :id, :display_name, { prompt: '--- Seleccionar region ---' },
                       data: { action: "change->#{js_controller}#loadDestinations" }
 
 = f.label :destination_id, "Destino"
 = f.collection_select :destination_id, @destinations, :id, :display_name, include_blank: '--- Seleccionar destino ---'
 
-= f.label :description, "Descripcion"
+= f.label :description, "Descripción"
 = f.text_area :description, class: "form-control"
 
 = f.label :price, "Precio"
